@@ -1,0 +1,50 @@
+.sk-container {
+  font-size: 1.4rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #666;
+  color: #fff;
+  z-index: 999;
+  content: "";
+  clear: both;
+  display: block;
+  text-align: right;
+}
+
+/* Important because we have to hide
+   the button in all the cases */
+.sk-hide-button {
+  display: none;
+}
+
+.sk-buttons {
+  float: left;
+  padding: 1rem;
+  width: 33.33%;
+  font-size: 1rem;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.sk-container .sk-buttons.LSK {
+  text-align: left;
+}
+
+.sk-container .sk-buttons.CSK {
+  text-align: center;
+}
+
+.sk-container .sk-buttons.CSK:first-child {
+  margin-left: 33.33%;
+}
+
+.sk-container .sk-buttons.RSK {
+  float: right;
+  text-align: right;
+}
