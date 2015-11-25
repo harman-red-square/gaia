@@ -65,11 +65,14 @@ var ContactsTag = (function() {
       tagLink.setAttribute('data-value', options[option].type);
       tagLink.setAttribute('role', 'option');
       tagLink.classList.add('tagItem');
+      tagLink.setAttribute('data-field-type', originalTag.dataset.fieldType);
 
       tagLink.addEventListener('click', function(event) {
         var tag = event.target;
         selectTag(tag);
+        contacts.Form.setCurrentTag = selectedTag;
         event.preventDefault();
+        contacts.Form.setCurrentEvent = event;
       });
 
       if (originalTag.dataset.value == options[option].type) {
@@ -100,7 +103,7 @@ var ContactsTag = (function() {
     unMarkTag(selectedTag);
 
     markTag(tag);
-    
+
     selectedTag = tag;
   };
 

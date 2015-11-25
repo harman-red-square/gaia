@@ -12,7 +12,6 @@ textarea {
   font-family: sans-serif;
   box-sizing: border-box;
   display: block;
-  width: 100%;
   height: 4rem;
   line-height: 4rem;
   resize: none;
@@ -115,8 +114,8 @@ fieldset {
   overflow: hidden;
   margin: 1.5rem 0 0 0;
   padding: 0;
-  font-size: 2rem;
-  line-height: 1em;
+  font-size: 1.3rem;
+  line-height: 1.2em;
   background: none;
   border: 0;
 }
@@ -570,4 +569,3 @@ html[dir="rtl"] form p input:focus {
   padding-right: 1.5rem;
   padding-left: 3rem;
 }
-

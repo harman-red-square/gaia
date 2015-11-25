@@ -72,7 +72,9 @@ var Contacts = (function() {
   var contactsDetails;
   var contactsForm;
 
-  var customTag, customTagReset, tagDone, tagHeader, lazyLoadedTagsDom = false;
+  var customTag, customTagReset, tagDone, tagHeader, tagAddDetails;
+  var lazyLoadedTagsDom = false, lazyLoadedDetailsDom;
+  var boxTitleTags=[];
 
   // Shows the edit form for the current contact being in an update activity
   // It receives an array of two elements with the facebook data && values
@@ -484,18 +486,52 @@ var Contacts = (function() {
     }
   }
 
-  var goToSelectTag = function goToSelectTag(event) {
-    contactTag = event.currentTarget.children[0];
+  function showDetails() {
+    navigation.go('add-details-view', 'right-left');
+    if (!tagAddDetails) {
+      tagAddDetails = document.querySelector('#add-details-header');
+      tagAddDetails.addEventListener('action', handleBack);
+    }
+    var boxTitle = document.querySelectorAll('li.action');
+    for(var i=0; i<boxTitle.length; i++) {
+      if (!boxTitleTags[i]) {
+        boxTitle[i].addEventListener('click', goToSelectTag);
+        boxTitleTags[i] = true;
+      }
+    }
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+  }
 
-    var tagViewElement = document.getElementById('view-select-tag');
-    if (!lazyLoadedTagsDom) {
+  var goToAddDetails = function goToAddDetails(event) {
+    var tagViewElement = document.getElementById('add-details-view');
+    if (!lazyLoadedDetailsDom) {
       LazyLoader.load(tagViewElement, function() {
-        showSelectTag();
-        lazyLoadedTagsDom = true;
-       });
+        lazyLoadedDetailsDom = true;
+        showDetails();
+      });
     }
     else {
-      showSelectTag();
+        showDetails();
+    }
+  };
+
+  var goToSelectTag = function goToSelectTag(event) {
+    contactTag = event.currentTarget.children[0];
+    if(contactTag.textContent==='Company'){
+      showComapny();
+    }else{
+      var tagViewElement = document.getElementById('view-select-tag');
+      if (!lazyLoadedTagsDom) {
+        LazyLoader.load(tagViewElement, function() {
+          showSelectTag();
+          lazyLoadedTagsDom = true;
+         });
+      }
+      else {
+        showSelectTag();
+      }
     }
   };
 
@@ -510,6 +546,11 @@ var Contacts = (function() {
     navigation.back(cb);
   };
 
+  var showComapny = function showCompany(){
+    document.querySelector('#companyNameHidden').hidden = false;
+    handleBack();
+  };
+
   var handleCancel = function handleCancel() {
     //If in an activity, cancel it
     if (ActivityHandler.currentlyHandling) {
@@ -521,18 +562,15 @@ var Contacts = (function() {
   };
 
   var handleSelectTagDone = function handleSelectTagDone() {
-    var prevValue = contactTag.textContent;
-    ContactsTag.clickDone(function() {
-      var valueModifiedEvent = new CustomEvent('ValueModified', {
-        bubbles: true,
-        detail: {
-          prevValue: prevValue,
-          newValue: contactTag.textContent
-        }
-      });
-      contactTag.dispatchEvent(valueModifiedEvent);
-      handleBack();
-    });
+    // For new design
+    contacts.Form.onNewFieldClicked(contacts.Form.setCurrentEvent);
+    var temp = contacts.Form.setCurrentElement;
+    document.getElementById(temp).
+     setAttribute('data-value',contacts.Form.setCurrentTag.dataset.value);
+    document.getElementById(temp).
+     setAttribute('data-l10n-id',contacts.Form.setCurrentTag.dataset.l10nId);
+    handleBack();
+    handleBack();
   };
 
   var handleCustomTag = function handleCustomTag(ev) {
@@ -1054,6 +1092,7 @@ var Contacts = (function() {
     'navigation': navigation,
     'sendEmailOrPick': sendEmailOrPick,
     'updatePhoto': updatePhoto,
+    'goToAddDetails': goToAddDetails,
     'checkCancelableActivity': checkCancelableActivity,
     'isEmpty': isEmpty,
     'getLength': getLength,

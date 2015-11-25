@@ -23,3 +23,9 @@
 	font-size: 30px;
 	-webkit-font-smoothing: antialiased;
 }
+
+[data-icon]:before,
+.icon_design {
+	margin-right: 1.2rem;
+	font-size: 1.6rem;
+}

@@ -1,0 +1,31 @@
+<element name="add-details-view" extends="section">
+  <template>
+    <gaia-header id="add-details-header" action="back">
+      <h1 data-l10n-id="addDetails">Add Details</h1>
+    </gaia-header>
+    <article class="view-body">
+      <form class="view-body-inner">
+        <ul id="details-list" class="selection-list compact" role="listbox">
+          <li class="action details_design" role="region">
+            <span data-icon="homescreen" data-taglist="phone-type" data-l10n-id="addPhone1" data-field-type="tel" class="icon_design"></span>
+          </li>
+          <li class="action details_design" role="region">
+            <span data-icon="tethering" data-taglist="email-type" data-l10n-id="addEmail1" data-field-type="email" class="icon_design"></span>
+          </li>
+          <li class="action details_design" role="region">
+            <span data-icon="gesture" data-l10n-id="addCompany" data-taglist="company-type" data-field-type="email" class="icon_design"></span>
+          </li>
+          <li class="action details_design" role="region">
+            <span data-icon="info" data-taglist="address-type" data-l10n-id="addAddress1" data-field-type="adr" class="icon_design"></span>
+          </li>
+          <li class="action details_design" role="region">
+            <span data-icon="time" data-taglist="date-type" data-l10n-id="addDate1" data-field-type="date" class="icon_design"></span>
+          </li>
+          <li class="action details_design" role="region">
+            <span data-icon="notifications" data-l10n-id="addComment1" data-field-type="note" class="icon_design"></span>
+          </li>
+        </ul>
+      </form>
+   </article>
+  </template>
+</element>

@@ -14,9 +14,10 @@ li button.icon-message:before {
 li button.send-sms {
   width: 0;
 }
+
 li button.icon-email:before {
   background-image: url("/shared/style/contacts/images/mail.png") !important;
-} 
+}
 
 .has-preferred-sim .button.icon-call {
   display: flex;

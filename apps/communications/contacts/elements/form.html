@@ -6,16 +6,12 @@
     </gaia-header>
     <progress id="throbber" value="0" max="100" class="pack-activity hide"></progress>
 
-    <div id='add-phone-#i#' role="listitem" data-template class='phone-template field-template' data-index="#i#">
+    <div id='add-phone-#i#' role="listitem" data-template class='phone-template' data-index="#i#">
       <fieldset class="fillflow-row">
-        <div class="two_fields first-row">
-          <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="tel_type_#i#">
-            <span aria-hidden="true" data-taglist="phone-type" name="tel" data-value="#type_value#"
-              id="tel_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">
-              #type#
-            </span>
+        <div class="two_fields first-row" hidden="true">
+          <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="tel_type_#i#" hidden="true">
           </legend>
-          <p class="setbox-item">
+          <p class="setbox-item" hidden="true">
             <input placeholder="Carrier" data-field="carrier" data-l10n-id="carrier" name="tel[#i#][carrier]" class="textfield" type="text" x-inputmode="latin-prose" value="#carrier#" id="carrier_#i#" dir="auto">
             <button type="reset">Clear</button>
           </p>
@@ -23,6 +19,10 @@
         <section class="second-row">
           <p class="setbox-item">
             <bdi>
+              <span aria-hidden="true" data-taglist="phone-type" name="tel" data-value="#type_value#"
+                id="tel_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">
+                #type#
+              </span>
               <input placeholder="Phone" data-field="value" data-l10n-id="tel" name="tel[#i#][value]" class="textfield" type="tel" value="#value#" id="number_#i#">
               <button type="reset">Clear</button>
             </bdi>
@@ -31,13 +31,13 @@
       </fieldset>
     </div>
 
-    <div id='add-email-#i#' role="listitem" data-template class='email-template field-template' data-index="#i#">
+    <div id='add-email-#i#' role="listitem" data-template class='email-template' data-index="#i#">
       <fieldset class="fillflow-row">
-        <legend class="action first-row" role="combobox" aria-haspopup="true" aria-labelledby="email_type_#i#">
-          <span aria-hidden="true" data-taglist="email-type" name="email[#i#][type]" data-value="#type_value#" id="email_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">#type#</span>
+        <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="email_type_#i#" hidden="true">
         </legend>
         <section>
           <p class="setbox-item second-row">
+            <span aria-hidden="true" data-taglist="email-type" name="email[#i#][type]" data-value="#type_value#" id="email_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">#type#</span>
             <input placeholder="Email" data-field="value" data-l10n-id="email" name="email[#i#][value]" class="textfield" type="email" value="#value#" id="email_#i#">
             <button type="reset">Clear</button>
           </p>
@@ -45,7 +45,7 @@
       </fieldset>
     </div>
 
-    <div id='add-address-#i#' role="listitem" data-template class='address-template field-template' data-index="#i#">
+    <div id='add-address-#i#' role="listitem" data-template class='address-template' data-index="#i#">
       <fieldset class="fillflow-row">
         <section>
           <p class="setbox-item first-row">
@@ -53,7 +53,7 @@
             <button type="reset">Clear</button>
           </p>
           <div class="two_fields second-row">
-            <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="address_type_#i#">
+            <legend class="action" aria-labelledby="address_type_#i#">
               <span aria-hidden="true" data-taglist="address-type" name="adr[#i#][type]" data-value="#type_value#" id="address_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">#type#</span>
             </legend>
             <p class="setbox-item">
@@ -78,11 +78,11 @@
     <div id='add-date-#i#' role="listitem" data-template class='date-template field-template' data-exclusive="true" data-custom="false" data-index="#i#">
       <fieldset class="fillflow-row first-row">
         <div class="two_fields">
-          <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="date_type_#i#">
+          <legend class="action" role="combobox" aria-haspopup="true" aria-labelledby="date_type_#i#" hidden="true">
             <span aria-hidden="true" data-taglist="date-type" name="date[#i#][type]" data-value="#type_value#" id="date_type_#i#" data-field="type" data-l10n-id="#type_l10n_id#">#type#</span>
           </legend>
           <section>
-            <p class="setbox-item">
+            <p class="setbox-item" hidden="true">
               <span aria-hidden="true" id="date-text_#i#" class="datetime placeholder">
                 Date
               </span>
@@ -113,11 +113,11 @@
         <form id="contact-form" action="#" class="fill-flow">
           <input name="id" id="contact-form-id" type="hidden" value="">
           <section class="item first">
-            <div id="thumbnail-action" href="#" class="item-media fillflow-media">
+            <div id="thumbnail-action" href="#" class="fillflow-media">
               <div role="button" id="photo-button" class="bb-button">
                 <p>
                   <span class="icon icon-addimage"></span>
-                  <em data-l10n-id="addPhoto">Add photo</em>
+                  <em data-l10n-id="contactPicture">Contact Picture</em>
                 </p>
                 <p class="edit-photo">
                   <em data-l10n-id="edit-picture">Edit Picture</em>
@@ -125,7 +125,7 @@
                 <img id="thumbnail-photo" alt="">
               </div>
             </div>
-            <div class="item-body-exp with-overflow">
+            <div class="item-body-exp">
               <p class="fillflow-row input-container">
                 <input placeholder="Name" data-field="givenName" data-l10n-id="givenName" name="givenName" class="textfield" type="text" x-inputmode="latin-prose" value="" id="givenName" dir="auto">
                 <button type="reset">Clear</button>
@@ -135,7 +135,7 @@
                 <button type="reset">Clear</button>
               </p>
             </div>
-            <div class="with-overflow">
+            <div class="with-overflow" id = "companyNameHidden">
               <p class="fillflow-row">
                 <input placeholder="Company Name" data-field="org" data-l10n-id="org" name="org" class="textfield" type="text" x-inputmode="verbatim" value="" id="org" dir="auto">
                 <button type="reset" id="clear-org">Clear</button>
@@ -148,10 +148,11 @@
               <section>
                 <div id="contacts-form-phones" role="list"></div>
               </section>
-              <button data-field-type="tel" id='add-new-phone' data-l10n-id="addPhone" class="fillflow-row action action-add icon icon-add">
+
+              <button data-field-type="tel" id='add-new-phone' class="fillflow-row action action-add icon icon-add hide_buttons">
                 Add phone number
               </button>
-              <hr>
+              <hr class="hide_buttons">
             </li>
 
             <li role="region" aria-label="Emails" data-l10n-id="emails">
@@ -159,13 +160,13 @@
                 <div id="contacts-form-emails" role="list"></div>
               </section>
 
-              <button data-field-type="email" id='add-new-email' data-l10n-id="addEmail" class="fillflow-row action action-add icon icon-add">
+              <button data-field-type="email" id='add-new-email' class="fillflow-row action action-add icon icon-add hide_buttons">
                 Add email address
               </button>
-              <hr>
+              <hr class="hide_buttons">
             </li>
 
-            <li role="region" aria-label="Addresses" data-l10n-id="addresses">
+            <li role="region" aria-label="Addresses" data-l10n-id="addresses" class="hide_buttons">
               <section>
                 <div id="contacts-form-addresses" role="list"></div>
               </section>
@@ -173,10 +174,10 @@
               <button data-field-type="adr" id='add-new-address' data-l10n-id="addAddress" class="fillflow-row action action-add icon icon-add">
                 Add new address
               </button>
-              <hr>
+              <hr class="hide_buttons">
             </li>
 
-            <li role="region" aria-label="Dates" data-l10n-id="dates">
+            <li role="region" aria-label="Dates" data-l10n-id="dates" class="hide_buttons">
               <section>
                 <div id="contacts-form-dates" role="list"></div>
               </section>
@@ -184,19 +185,20 @@
               <button data-field-type="date" id='add-new-date' data-l10n-id="addDate" class="fillflow-row action action-add icon icon-add">
                 Add Date
               </button>
-              <hr>
+              <hr class="hide_buttons">
             </li>
 
-            <li role="region" aria-label="Notes" data-l10n-id="notes">
+            <li role="region" aria-label="Notes" data-l10n-id="notes" class="hide_buttons">
               <section>
                 <div id="contacts-form-notes" role="list"></div>
               </section>
 
-              <button data-field-type="note" id='add-new-note' data-l10n-id="addComment" class="fillflow-row action action-add icon icon-add">
+              <button data-field-type="note" id='add-new-note' data-l10n-id="addComment" class="fillflow-row action action-add icon icon-add hide_buttons">
                 Add comment
               </button>
-              <hr>
+              <hr class="hide_buttons">
             </li>
+            <button id="add-details">Add details</button>
           </ul>
         </form>
 

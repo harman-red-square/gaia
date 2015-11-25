@@ -328,7 +328,7 @@ span.icon.icon-delete {
 span.icon.icon-addimage {
   background-image: url(/contacts/style/gphx/bitmap/default/forms/add.png);
   background-size: 3rem;
-  width: 7rem;
+  width: 6rem;
   height: 3rem;
 }
 
@@ -433,8 +433,8 @@ li button.icon-find-and-merge:before {
   margin: 0;
   -moz-margin-end: 1rem;
   margin-bottom: 0.5rem;
-  width: 7rem;
-  height: 7rem;
+  width: 5rem;
+  height: 5rem;
   position: relative;
   z-index: 0;
   border: 1px solid #c7c7c7;
@@ -456,22 +456,24 @@ li button.icon-find-and-merge:before {
   position: absolute;
   margin:0;
   padding:0;
-  left: -1.5rem;
-  top: 2rem;
+  left: -0.6rem;
+  top: 1rem;
   text-align: center;
   z-index: -1;
   width: 10rem;
 }
 
 .fillflow-media p em {
-  display: block;
+  display: inline;
   color: #858585;
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   font-weight: normal;
   font-style: italic;
   margin-top: 1.8rem;
+  margin-left: 0.8rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  vertical-align: top;
 }
 
 .fillflow-media .edit-photo {
@@ -489,8 +491,6 @@ li button.icon-find-and-merge:before {
   width: 100%;
   height: 100%;
   background: none;
-  line-height: inherit;
-  padding: 0;
 }
 
 .fillflow-media img {
@@ -550,7 +550,7 @@ nav[data-type="scrollbar"] ol > li > * {
 
 #groups-list.selecting .group-section li,
 #search-list.selecting li {
-  -moz-padding-start: 2rem;  
+  -moz-padding-start: 2rem;
 }
 
 form[role="dialog"].no-overlay {
@@ -662,3 +662,13 @@ html[dir="rtl"] #view-contacts-list [data-type="list"] {
   padding-right: unset;
 }
 
+.details_design {
+  font-size: 1.6rem;
+  padding: 1.3rem;
+  border-bottom: 0.5px gray solid;
+  margin-left: 1.2rem;
+}
+
+.hide_buttons {
+  display: none;
+}
