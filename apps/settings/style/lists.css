@@ -14,12 +14,16 @@ ul li {
   -moz-box-sizing: border-box;
   position: relative;
   margin: 0 1.5rem;
-  border-bottom: 0.1rem solid #E5E5E5;
+  border-bottom: 0.1rem solid #999;
   color: #000;
 }
 
 ul li.description {
   border-bottom: none;
+}
+
+ul+ul li:first-child {
+  border-top: 0.1rem solid #e6e6e3;
 }
 
 ul.border-last-child li:last-child {
@@ -28,7 +32,11 @@ ul.border-last-child li:last-child {
 }
 
 ul li:last-child {
-  border-bottom: 0.1rem solid #E5E5E5;
+  border-bottom: 0.1rem solid #999;
+}
+
+ul li.fxaButton,ul li.about-app-storage,ul li.findmyDevice {
+  border-bottom: 0.1rem solid #999;
 }
 
 ul li.sound-setting {
@@ -50,12 +58,12 @@ ul li > label > span,
 ul li > label > small {
   text-decoration: none;
   outline: 0;
-  color: #333333;
+  color: #000;
   -moz-box-sizing: border-box;
   font-size: 1.5rem;
   padding: 0 1.7rem;
   margin: 0 -1.5rem;
-  font-style: normal;
+  font-style: italic;
 }
 
 #enabled-fmd {
@@ -78,17 +86,17 @@ ul li > a.list-label{
 ul li,
 ul li > a,
 ul li > label {
-  min-height: 5rem;
+  min-height: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom-color: #E5E5E5;
+  border-bottom-color: #999999;
 }
 
 
 ul li > a,
 ul li > label {
-  min-height: 5rem;
+  min-height: 6rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -138,8 +146,7 @@ ul > li > progress + span {
 /* description + value on the same line */
 ul li .info-item {
   display: flex;
-
-  font-style: normal;
+  font-style: italic;
   justify-content: center;
 }
 
@@ -159,7 +166,7 @@ ul li .info-item .info-item-content {
   order: 3;
   flex: 1 1 auto;
   color: #999999;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin-top: 0.5rem;
 }
 
@@ -186,7 +193,7 @@ ul li > small,
 ul li > label > small,
 ul li > a > small {
   display: block;
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   color: #505859;
   /* click/tap events should be caught by the <a> element below the <small> */
   pointer-events: none;
@@ -197,7 +204,7 @@ small.multiline > span {
 }
 
 ul li > label {
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   line-height: 1.9rem;
   font-weight: 400;
   margin: 0;
@@ -311,7 +318,7 @@ ul li button {
 /* custom styles for boolean inputs (see /shared/style/switches.css) */
 ul li label {
   text-transform: none;
-  font-style: normal;
+  font-style: italic;
 }
 
 ul li > label:not([for]),
@@ -324,7 +331,7 @@ ul li > label.pack-switch {
   -moz-padding-end: 1.5rem;
   width: 100%;
   height: calc(100% - 1rem);
-  min-height: 4rem;
+  min-height: 5rem;
   overflow: visible;
   display: flex;
 }
@@ -432,9 +439,9 @@ ul li p {
    white-space: normal;
    color: #999999;
    padding: 0.1rem 1.6rem 1rem;
-   font-style: normal;
-   font-size: 1.25rem;
-   margin-top: -1rem;
+   font-style: italic;
+   font-size: 1.5rem;
+   margin-top: -2rem;
 }
 
 #internet-sharing-usb-desc1 {
@@ -614,7 +621,6 @@ ul li > label.pack-switch > input ~ span.carrier-ims-switch:after {
   top: 0.5rem;
 }
 /*firefox Account Management CSS */
-
 #fxa-logout {
   font-size: 1.5rem;
 }

@@ -31,7 +31,7 @@ define(function(require) {
           dialogElement: panel.querySelector('.wifi-bad-credentials-dialog'),
           okBtn: panel.querySelector('.wifi-bad-credentials-confirm'),
           cancelBtn: panel.querySelector('.wifi-bad-credentials-cancel'),
-          wifiAvailableNetworksHeader :panel.querySelector('.wifiAvailableNetworks '),
+          AvailableNetworkHeader: panel.querySelector('.wifiAvailableNetworks'),
           wifiSubHeading :panel.querySelector('.explanations')
         };
 
@@ -209,6 +209,7 @@ define(function(require) {
       _setMozSettingsEnabled: function(enabled) {
         this._networkList().then((networkList) => {
           elements.wifiCheckbox.checked = enabled;
+          var status =  document.getElementById('wifi-desc');
           if (enabled) {
             /**
              * wifiManager may not be ready (enabled) at this moment.
@@ -217,9 +218,9 @@ define(function(require) {
              */
             networkList.clear(true);
             elements.wpsColumn.hidden = false;
-            elements.wifiAvailableNetworksHeader.hidden= false;
-            elements.wifiSubHeading.style.display="none";
-            document.getElementById("wifi-desc").textContent = "Enabled";
+            elements.AvailableNetworkHeader.hidden= false;
+            elements.wifiSubHeading.style.display='none';
+            status.setAttribute('data-l10n-id','enabled');
           } else {
             if (this._wps.inProgress) {
               elements.wpsInfoBlock.
@@ -235,9 +236,9 @@ define(function(require) {
             networkList.clear(false);
             networkList.autoscan = false;
             elements.wpsColumn.hidden = true;
-            elements.wifiAvailableNetworksHeader.hidden=true;
-            elements.wifiSubHeading.style.display="block";
-            document.getElementById("wifi-desc").textContent = "Disabled";
+            elements.AvailableNetworkHeader.hidden=true;
+            elements.wifiSubHeading.style.display='block';
+            status.setAttribute('data-l10n-id','disabled');
           }
         });
       },

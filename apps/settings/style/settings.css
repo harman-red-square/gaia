@@ -109,12 +109,12 @@ section[role="region"] > header {
 
 section[role="region"] > div {
   position: absolute;
-  top: 4rem;
+  top: 5rem;
   right: 0;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 4rem);
+  height: calc(100% - 5rem);
   overflow-y: scroll;
   will-change: scroll-position;
 }
@@ -333,7 +333,7 @@ ul li > span.retrive{
   margin-top: -2rem;
   padding-top: 0.5rem;
   padding-bottom: 1.3rem;
-  -moz-padding-start: 1.6rem;
+  -moz-padding-start: 0.2rem;
   -moz-padding-end: 4rem;
   white-space: normal;
 }
@@ -512,7 +512,7 @@ section ul.operate-certificate:after {
   border: solid 0.1rem #A6A6A6;
   border-radius: 0.3rem;
   display: inline-block;
-  height: 2rem;
+  height: 3rem;
   margin: 0.8rem 5%;
   padding: 0.1rem;
   width: 90%;
@@ -568,12 +568,12 @@ section ul.operate-certificate:after {
 
 #mediaStorage .stackedbar-color-label {
   display: inline-block;
-  height: 2.5rem;
-  left: 1rem;
+  height: 2rem;
+  left: 1.5rem;
   padding: 0;
   position: absolute;
-  top: 1.7rem;
-  width: 2.5rem;
+  top: 2.1rem;
+  width: 2rem;
 }
 
 #mediaStorage .stackedbar-color-label + a {
@@ -1313,6 +1313,9 @@ html[dir="rtl"] ul li > label.range-icons span {
   right: 0;
 }
 
+#show-password {
+  margin-left: -2rem;
+}
 .fdn-dialog-placeholder,
 .vm-placeholder{
   float: right;
@@ -1406,9 +1409,9 @@ input[type="tel"].input-area-text-padding{
 }
 
 #update-device-name-input {
-  border: 0.8rem solid #33D6FF;
   box-shadow: 0 0 0 0.1rem #707070 inset;
   transition: box-shadow 0.3s ease 0s, border 0.3s ease 0s;
+  border: 0.8rem solid #33d6ff;
   padding-left: 0;
   float: left;
   padding-right: 2.6rem;
@@ -1532,7 +1535,7 @@ ul li > label.range-icons span.moon1_icons {
 
 section[role="region"],
 section[role="region"] > div > ul {
-  background-color: rgba(245, 245, 245, 0.09);
+  background-color: #f4f4f4;
 }
 
 .carrier-ims-profile-option {

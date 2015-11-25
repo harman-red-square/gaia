@@ -15,6 +15,7 @@
 var FxaModuleCoppa = (function() {
 
   var MINIMUM_AGE = 13;
+  var yearofBirth = document.getElementById('fxa-h4');
 
   function _populateSelect(select) {
     var currentYear = new Date().getFullYear();
@@ -23,7 +24,7 @@ var FxaModuleCoppa = (function() {
       var option = document.createElement('option');
       option.value= year;
       if (year == start) {
-        option.setAttribute('data-l10n-id', 'fxa-age-earlier');
+        option.setAttribute('data-l10n-id', 'fxa-age-earlier1');
         option.setAttribute('data-l10n-args', '{ "year": "' + year + '" }');
       } else {
         option.textContent = year;
@@ -65,6 +66,7 @@ var FxaModuleCoppa = (function() {
     }
 
     this.fxaAgeSelect.addEventListener('change', () => {
+      navigator.mozL10n.setAttributes(yearofBirth, 'fxa-year-of-birth', { });
       _enableNext(this.fxaAgeSelect.value);
     });
 

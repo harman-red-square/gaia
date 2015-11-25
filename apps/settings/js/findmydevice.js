@@ -13,6 +13,7 @@ define('findmydevice', ['modules/settings_utils', 'shared/settings_listener'
     // since in that case we also want to enable Find My Device if it's
     // not already registered.
     _interactiveLogin: false,
+    _passwordRequired: false,
     _loginButton: null,
 
     init: function fmd_init() {
@@ -41,6 +42,7 @@ define('findmydevice', ['modules/settings_utils', 'shared/settings_listener'
           onerror: function fmd_fxa_onerror(err) {
             console.error('Find My Device: onerror fired: ' + err);
             self._interactiveLogin = false;
+            self._passwordRequired = false;
             self._loginButton.removeAttribute('disabled');
             var errorName = JSON.parse(err).name;
             if (errorName !== 'OFFLINE') {
@@ -130,7 +132,12 @@ define('findmydevice', ['modules/settings_utils', 'shared/settings_listener'
         });
       }
 
+      if(this._passwordRequired) {
+        wakeUpFindMyDevice(IAC_API_WAKEUP_REASON_TRY_DISABLE);
+      }
+
       this._interactiveLogin = false;
+      this._passwordRequired = false;
 
       var unverifiedError = document.getElementById(
         'findmydevice-fxa-unverified-error');
@@ -153,23 +160,22 @@ define('findmydevice', ['modules/settings_utils', 'shared/settings_listener'
       }
 
       var checkbox = document.querySelector('#findmydevice-enabled input');
-      var finddevice=document.querySelector('#findmydevice-enabled small');
-      var findmydevice=document.querySelector('.findmyDevice small');
-      if (checkbox.checked) {
-        finddevice.textContent = "Enabled";
-        } else {
-          findmydevice.textContent= "Disabled";
-        }
+      checkbox.disabled = true;
 
       if (checkbox.checked === false) {
-        finddevice.textContent = "Disabled";
-        findmydevice.textContent= "Disabled";
-        wakeUpFindMyDevice(IAC_API_WAKEUP_REASON_TRY_DISABLE);
+        this._passwordRequired = true;
+        var self = this;
+        navigator.mozId.request(
+          {
+            oncancel: function () {
+              self._passwordRequired = false;
+              console.log('Refresh Authentication: oncancel fired');
+            },
+           refreshAuthentication: 0
+         });
       } else {
         SettingsHelper('findmydevice.enabled').set(true, function() {
-            finddevice.textContent = "Enabled";
-            findmydevice.textContent = "Enabled";
-            checkbox.disabled = false;
+          checkbox.disabled = false;
         });
       }
     },

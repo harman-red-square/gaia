@@ -211,7 +211,7 @@ input:invalid,
 textarea:invalid,
 .skin-dark input:invalid,
 .skin-dark textarea:invalid {
-  color: #b90000;
+  color: #000;
 }
 
 textarea:focus,

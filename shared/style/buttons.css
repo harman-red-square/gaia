@@ -39,14 +39,14 @@ button,
 /* Recommend */
 button.recommend,
 .bb-button.recommend {
-  font-size: 1.9rem;
+  font-size: 1.5rem;
 }
 
 /* Danger */
 button.danger,
 .danger.bb-button {
   font-size: 1.5rem;
-  }
+}
 
 /* Pressed */
 button:active,
@@ -154,11 +154,10 @@ li .button {
   text-overflow: initial;
   white-space: normal;
   line-height: 2rem;
-  padding: 1rem 1.2rem;
   font-size: 1.5rem;
-  margin: 0 -1.5rem;
-  padding: 1.5rem 1.5rem 1rem 0rem;
-  font-style: normal;
+  margin: 0 -1.5rem;/*margin: 0 0 1rem; to 0 -1.5rem, UX: 4.6.4*/
+  padding: 1.5rem 1.5rem 1rem;
+  font-style: italic;
 }
 
 /* -----------------------------------------
@@ -263,7 +262,7 @@ li .button.icon-dialog:before {
   bottom: 0.5rem;
   border-top: 0.7rem solid transparent;
   border-bottom: 0.7rem solid transparent;
-  border-left: 0.7rem solid transparent;
+  border-left: 0.7rem solid transparent;/*UX: 6.4.1 #00aac5 -> transparent*/
   transform: rotate(45deg);
   z-index: 1;
 }
@@ -386,7 +385,7 @@ select:-moz-focusring {
   -moz-padding-end: 5rem;
   text-indent: 0;
   font-weight: 400;
-  font-size: 1.5rem;
+  font-size: 1.5rem;/* 1.7 to 1.5 change , UX: 6.4.1 */
   /*
     The select element uses the text color to determine the color of the outline.
     We put a text shadow with needed offset and no blur, so that replaces the text.
@@ -497,4 +496,23 @@ html[dir="rtl"] .button[data-icon] select {
 
 #button-icon {
   margin-top: -1rem;
+}
+
+#fxa-age-select {
+  margin-top: 0.5rem;
+  margin-left: 0.7rem;
+}
+
+h4 {
+  margin-top: -1rem;
+  font-family: inherit;
+  font-size: initial;
+  font-weight: inherit;
+  margin-left: 0.7rem;
+}
+
+#fxa-coppa-button {
+  top: -3rem;
+  margin: 0;
+  -moz-padding-end: 0;
 }
