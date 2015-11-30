@@ -2,6 +2,8 @@
 'use strict';
 
 require('/shared/test/unit/load_body_html_helper.js');
+require('/js/panels/network/panel.js');
+require('/js/panels/root/privacy_items.js');
 
 mocha.globals([
   'RootPanelHandler'
@@ -12,6 +14,90 @@ Object.defineProperty(document, 'readyState', {
   configurable: true
 });
 require('/js/startup.js');
+
+suite('should show/hide nfc item correctly', function() {
+  var realNfc;
+  var nfcItem;
+
+  setup(function() {
+    realNfc = navigator.mozNfc;
+    loadBodyHTML('./_root.html');
+    nfcItem = document.querySelector('.nfc-settings');
+  });
+
+  teardown(function() {
+    navigator.mozNfc = realNfc;
+  });
+
+  test('nfc is available', function() {
+    navigator.mozNfc = {};
+    updateSimItemsAndNfc();
+    assert.isFalse(nfcItem.hidden);
+  });
+
+  test('nfc is not available', function() {
+    navigator.mozNfc = null;
+    updateSimItemsAndNfc();
+    assert.isTrue(nfcItem.hidden);
+  });
+});
+
+suite('should show/hide sim items correctly', function() {
+  var realMozMobileConnections;
+
+  var callSettingsItem;
+  var dataConnectivityItem;
+  var messagingItem;
+  var simSecurityItem;
+
+  setup(function() {
+    realMozMobileConnections = navigator.mozMobileConnections;
+    loadBodyHTML('./_root.html');
+    callSettingsItem = document.getElementById('call-settings');
+    dataConnectivityItem = document.getElementById('data-connectivity');
+    messagingItem = document.getElementById('messaging-settings');
+    simSecurityItem = document.getElementById('simSecurity-settings');
+  });
+
+  teardown(function() {
+    navigator.mozMobileConnections = realMozMobileConnections;
+  });
+
+  test('no mobile connections', function() {
+    navigator.mozMobileConnections = null;
+    updateSimItemsAndNfc();
+    updateSimItem();
+    assert.isTrue(callSettingsItem.hidden);
+    assert.isTrue(dataConnectivityItem.hidden);
+    assert.isTrue(messagingItem.hidden);
+    assert.isTrue(simSecurityItem.hidden);
+  });
+
+  test('single sim', function() {
+    navigator.mozMobileConnections = {
+      length: 1
+    };
+    updateSimItemsAndNfc();
+    updateSimItem();
+    assert.isFalse(callSettingsItem.hidden);
+    assert.isFalse(dataConnectivityItem.hidden);
+    assert.isFalse(messagingItem.hidden);
+    assert.isFalse(simSecurityItem.hidden);
+  });
+
+  test('multiple sims', function() {
+    navigator.mozMobileConnections = {
+      length: 2
+    };
+    updateSimItemsAndNfc();
+    updateSimItem();
+    assert.isFalse(callSettingsItem.hidden);
+    assert.isFalse(dataConnectivityItem.hidden);
+    assert.isFalse(messagingItem.hidden);
+    assert.isTrue(simSecurityItem.hidden);
+  });
+});
+
 
 suite('RootPanelHandler', function() {
   var rootPanelHandler;
@@ -24,89 +110,6 @@ suite('RootPanelHandler', function() {
 
   teardown(function() {
     document.body.innerHTML = '';
-  });
-
-  suite('should show/hide nfc item correctly', function() {
-    var realNfc;
-    var nfcItem;
-
-    setup(function() {
-      realNfc = navigator.mozNfc;
-      nfcItem = document.querySelector('.nfc-settings');
-    });
-
-    teardown(function() {
-      navigator.mozNfc = realNfc;
-    });
-
-    test('nfc is available', function() {
-      navigator.mozNfc = {};
-      rootPanelHandler = RootPanelHandler(rootElement);
-      assert.isFalse(nfcItem.hidden);
-    });
-
-    test('nfc is not available', function() {
-      navigator.mozNfc = null;
-      rootPanelHandler = RootPanelHandler(rootElement);
-      assert.isTrue(nfcItem.hidden);
-    });
-  });
-
-  suite('should show/hide sim items correctly', function() {
-    var realMozMobileConnections;
-
-    var callSettingsItem;
-    var dataConnectivityItem;
-    var messagingItem;
-    var simSecurityItem;
-    var simCardManagerItem;
-
-    setup(function() {
-      realMozMobileConnections = navigator.mozMobileConnections;
-      callSettingsItem = document.getElementById('call-settings');
-      dataConnectivityItem = document.getElementById('data-connectivity');
-      messagingItem = document.getElementById('messaging-settings');
-      simSecurityItem = document.getElementById('simSecurity-settings');
-      simCardManagerItem = document.getElementById('simCardManager-settings');
-    });
-
-    teardown(function() {
-      navigator.mozMobileConnections = realMozMobileConnections;
-    });
-
-    test('no mobile connections', function() {
-      navigator.mozMobileConnections = null;
-      rootPanelHandler = RootPanelHandler(rootElement);
-      assert.isTrue(callSettingsItem.hidden);
-      assert.isTrue(dataConnectivityItem.hidden);
-      assert.isTrue(messagingItem.hidden);
-      assert.isTrue(simSecurityItem.hidden);
-      assert.isTrue(simCardManagerItem.hidden);
-    });
-
-    test('single sim', function() {
-      navigator.mozMobileConnections = {
-        length: 1
-      };
-      rootPanelHandler = RootPanelHandler(rootElement);
-      assert.isFalse(callSettingsItem.hidden);
-      assert.isFalse(dataConnectivityItem.hidden);
-      assert.isFalse(messagingItem.hidden);
-      assert.isFalse(simSecurityItem.hidden);
-      assert.isTrue(simCardManagerItem.hidden);
-    });
-
-    test('multiple sims', function() {
-      navigator.mozMobileConnections = {
-        length: 2
-      };
-      rootPanelHandler = RootPanelHandler(rootElement);
-      assert.isFalse(callSettingsItem.hidden);
-      assert.isFalse(dataConnectivityItem.hidden);
-      assert.isFalse(messagingItem.hidden);
-      assert.isTrue(simSecurityItem.hidden);
-      assert.isFalse(simCardManagerItem.hidden);
-    });
   });
 
   suite('should show/hide developer menu item correctly', function() {

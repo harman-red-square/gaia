@@ -64,31 +64,6 @@ define(function(require) {
       return initLowPriorityItemsPromise;
     };
 
-    /**
-     * Update the sim and NFC related items based on mozMobileConnections and Device.
-     */
-
-    var updateSimItemsAndNfc = function rph_refrehsSimItems() {
-       if (navigator.mozMobileConnections) {
-         if (navigator.mozMobileConnections.length === 1) { // single sim
-           document.getElementById('simCardManager-settings').hidden = true;
-         } else { // dsds
-           document.getElementById('simSecurity-settings').hidden = true;
-         }
-       } else {
-         // hide telephony panels
-         var elements = ['call-settings',
-                         'data-connectivity',
-                         'messaging-settings'];
-         elements.forEach(function(el) {
-           document.getElementById(el).hidden = true;
-         });
-       }
-       var nfcItem = document.querySelector('.nfc-settings');
-        nfcItem.hidden = !navigator.mozNfc;
-     };
-      updateSimItemsAndNfc();
-
     return SettingsPanel({
       onInit: function rp_onInit(panel) {
         root = Root();
@@ -158,3 +133,30 @@ define(function(require) {
     });
   };
 });
+/**
+ * Update the sim and NFC related items
+   based on mozMobileConnections and Device.
+ */
+
+var updateSimItemsAndNfc = function rph_refrehsSimItems() {
+    'use strict';
+   if (navigator.mozMobileConnections) {
+     if (navigator.mozMobileConnections.length === 1) { // single sim
+       document.getElementById('simCardManager-settings').hidden = true;
+     } else { // dsds
+       document.getElementById('simSecurity-settings').hidden = true;
+     }
+   } else {
+     // hide telephony panels
+     var elements = ['call-settings',
+                     'data-connectivity',
+                     'simCardManager-settings',
+                     'messaging-settings'];
+     elements.forEach(function(el) {
+       document.getElementById(el).hidden = true;
+     });
+   }
+   var nfcItem = document.querySelector('.nfc-settings');
+    nfcItem.hidden = !navigator.mozNfc;
+ };
+  updateSimItemsAndNfc();

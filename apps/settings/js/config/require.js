@@ -114,7 +114,7 @@ require.config({
       exclude: ['main']
     },
     {
-      name: 'panels/root/panel',
+      name: 'panels/network/panel',
       exclude: [
         'main',
         'panels/root/low_priority_items',
